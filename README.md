@@ -11,7 +11,7 @@ Esse projeto foi pensado com uma estrutura limpa, escalável e organizada, segui
 - Node.js  
 - Express  
 - Prisma ORM  
-- PostgreSQL (ou outro banco compatível com Prisma)  
+- PostgreSQL (Neon)
 - JWT (JSON Web Token)  
 - Bcrypt.js  
 - Dotenv  
