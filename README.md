@@ -25,14 +25,17 @@ back/
 ├── prisma/
 │   ├── migrations/
 │   └── schema.prisma
+|   └── seed.js
 ├── src/
 │   ├── config/
 │   │   └── db.js
 │   ├── controllers/
 │   │   └── authController.js
+|   |   └── watchlisController.js
 │   ├── routes/
 │   │   ├── authRoutes.js
 │   │   └── movieRoutes.js
+|   |   └── watchlistRoutes.js
 │   ├── utils/
 │   │   └── generateToken.js
 │   └── server.js
