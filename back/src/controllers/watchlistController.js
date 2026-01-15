@@ -107,6 +107,42 @@ export const updateWatchlist = async (req, res) => {
     try {
         const { movieId } = req.params
         const { status, rating, notes } = req.body
+
+        const movieExistInWatchlist = await prisma.watchlistItem.findUnique({
+            where: {
+                userId_movieId: {
+                    userId: req.user.id,
+                    movieId: movieId
+                }
+            }
+        })
+
+        if (!movieExistInWatchlist) {
+            return res.status(404).json({
+                error: "Movie doesn't exist at this list"
+            })
+        }
+
+        const dataToUpdate = {}
+
+        if (status !== undefined) dataToUpdate.status = status
+        if (rating !== undefined) dataToUpdate.rating = rating
+        if (notes !== undefined) dataToUpdate.notes = notes
+
+        const updated = await prisma.watchlistItem.update({
+            where: {
+                userId_movieId: {
+                    userId: req.user.id,
+                    movieId
+                }
+            },
+            data: dataToUpdate
+        })
+
+        return res.status(200).json({
+            status: "success",
+            data: updated
+        })
     }
 
     catch (err) {
