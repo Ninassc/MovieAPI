@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser"
 
 import "./config/db.js"; // 👈 IMPORTANTE: força inicialização
 import movieRoutes from "./routes/movieRoutes.js";
@@ -9,7 +10,13 @@ import watchlistRoutes from "./routes/watchlistRoutes.js"
 
 const app = express();
 
-app.use(cors());
+app.use(cookieParser())
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.get("/", (req,res) => {
